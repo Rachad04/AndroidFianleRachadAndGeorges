@@ -1,12 +1,8 @@
 package com.usj.midtermrachadsouaiby.data
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "Spending")
 data class Spending(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val description: String,
-    val amount: Double,
-    val date: String
+    val id: Int = 0,                // Primary key (optional, handled by SQLite)
+    val description: String,        // Description of the spending
+    val amount: Double,             // Amount spent
+    val date: String                // Date of the transaction
 )

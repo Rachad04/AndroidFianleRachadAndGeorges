@@ -1,38 +1,45 @@
 package com.usj.midtermrachadsouaiby.ui.spendinglist
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.usj.midtermrachadsouaiby.R
 import com.usj.midtermrachadsouaiby.data.Spending
-import com.usj.midtermrachadsouaiby.databinding.SpendingItemBinding
 
 class SpendingAdapter : RecyclerView.Adapter<SpendingAdapter.SpendingViewHolder>() {
 
-    private var spendings = emptyList<Spending>()
+    private var spendings = listOf<Spending>()
 
-    class SpendingViewHolder(private val binding: SpendingItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(spending: Spending) {
-            binding.itemTitle.text = spending.description
-            binding.itemAmount.text = spending.amount.toString()
-            binding.itemDate.text = spending.date
-        }
+    // Set spendings to update the RecyclerView
+    fun setSpendings(spendings: List<Spending>) {
+        this.spendings = spendings
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpendingViewHolder {
-        // Inflate the layout using ViewBinding
-        val binding = SpendingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SpendingViewHolder(binding)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.spending_item, parent, false)
+        return SpendingViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: SpendingViewHolder, position: Int) {
-        holder.bind(spendings[position])
+        val spending = spendings[position]
+        holder.bind(spending)
     }
 
     override fun getItemCount() = spendings.size
 
-    fun setSpendings(spendings: List<Spending>) {
-        this.spendings = spendings
-        notifyDataSetChanged()
+    class SpendingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val descriptionTextView: TextView = itemView.findViewById(R.id.itemEventName)
+        private val amountTextView: TextView = itemView.findViewById(R.id.itemPrice)
+        private val dateTextView: TextView = itemView.findViewById(R.id.itemDate)
+
+        fun bind(spending: Spending) {
+            // Set the data from the spending object to the corresponding TextViews
+            descriptionTextView.text = spending.description
+            amountTextView.text = "$${spending.amount}"
+            dateTextView.text = spending.date
+        }
     }
 }

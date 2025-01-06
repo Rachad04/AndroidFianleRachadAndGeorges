@@ -12,6 +12,15 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+
+    dependencyResolutionManagement {
+        repositories {
+            google()
+            mavenCentral()
+            maven("https://jitpack.io") // Add JitPack repository
+        }
+    }
+
 }
 
 rootProject.name = "Midterm Rachad Souaiby"

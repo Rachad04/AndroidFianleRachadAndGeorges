@@ -1,13 +1,13 @@
 package com.usj.midtermrachadsouaiby.repository
 
 import com.usj.midtermrachadsouaiby.data.Spending
-import com.usj.midtermrachadsouaiby.data.SpendingDao
-import kotlinx.coroutines.flow.Flow
+import com.usj.midtermrachadsouaiby.data.SpendingDatabaseHelper
 
-class SpendingRepository(private val spendingDao: SpendingDao) {
-    val allSpendings: Flow<List<Spending>> = spendingDao.getAllSpendings()
+class SpendingRepository(private val dbHelper: SpendingDatabaseHelper) {
 
-    suspend fun insertSpending(spending: Spending) {
-        spendingDao.insertSpending(spending)
+    fun getAllSpendings(): List<Spending> = dbHelper.getAllSpendings()
+
+    fun insertSpending(spending: Spending): Long {
+        return dbHelper.insertSpending(spending.description, spending.amount, spending.date)
     }
 }

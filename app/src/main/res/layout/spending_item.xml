@@ -6,34 +6,35 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/itemTitle"
+        android:id="@+id/itemEventName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Event Name"
         android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/itemAmount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Amount"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/itemTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.3"/>
 
     <TextView
         android:id="@+id/itemDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/itemAmount"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/itemEventName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintWidth_percent="0.3"/>
 
+    <TextView
+        android:id="@+id/itemPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/itemDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.3"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

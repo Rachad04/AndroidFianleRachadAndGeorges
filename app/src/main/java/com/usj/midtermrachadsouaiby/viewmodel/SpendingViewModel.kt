@@ -1,19 +1,36 @@
 package com.usj.midtermrachadsouaiby.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.usj.midtermrachadsouaiby.data.Spending
 import com.usj.midtermrachadsouaiby.repository.SpendingRepository
 import kotlinx.coroutines.launch
 
 class SpendingViewModel(private val repository: SpendingRepository) : ViewModel() {
-    val allSpendings = repository.allSpendings.asLiveData()
+    private val _spendings = MutableLiveData<List<Spending>>()
+    val spendings: LiveData<List<Spending>> get() = _spendings
+
+    fun fetchAllSpendings() {
+        viewModelScope.launch {
+            try {
+                _spendings.postValue(repository.getAllSpendings())
+            } catch (e: Exception) {
+                // Handle errors if necessary (e.g., logging or notifying the UI)
+            }
+        }
+    }
 
     fun addSpending(spending: Spending) {
         viewModelScope.launch {
-            repository.insertSpending(spending)
+            try {
+                repository.insertSpending(spending)
+                fetchAllSpendings()
+            } catch (e: Exception) {
+                // Handle errors if necessary
+            }
         }
     }
 }
