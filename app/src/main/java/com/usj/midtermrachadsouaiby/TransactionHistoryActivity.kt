@@ -62,17 +62,33 @@ class TransactionHistoryActivity : AppCompatActivity() {
             .setView(dialogView)
             .setPositiveButton("Add") { _, _ ->
                 val activity = activityInput.text.toString()
-                val price = priceInput.text.toString()
+                var price = priceInput.text.toString()
                 val date = dateInput.text.toString()
 
                 if (activity.isNotEmpty() && price.isNotEmpty() && date.isNotEmpty()) {
-                    // Add the new transaction to the list
-                    transactions.add(Triple(activity, price, date))
+                    // Ensure the price starts with a "$"
+                    if (!price.startsWith("$")) {
+                        price = "$$price"
+                    }
 
-                    // Refresh the transaction list
-                    refreshTransactionList(transactionListLayout)
+                    // Format the date to YYYY-MM-DD
+                    val formattedDate = formatDate(date)
 
-                    Toast.makeText(this, "Transaction added!", Toast.LENGTH_SHORT).show()
+                    if (formattedDate != null) {
+                        // Add the new transaction to the list
+                        transactions.add(Triple(activity, price, formattedDate))
+
+                        // Refresh the transaction list
+                        refreshTransactionList(transactionListLayout)
+
+                        Toast.makeText(this, "Transaction added!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Invalid date format! Use YYYYMMDD or YYYY/MM/DD.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 } else {
                     Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show()
                 }
@@ -100,6 +116,20 @@ class TransactionHistoryActivity : AppCompatActivity() {
             date.text = transaction.third
 
             transactionListLayout.addView(transactionView)
+        }
+    }
+
+    // Helper function to format the date
+    private fun formatDate(date: String): String? {
+        // Check if the input is in YYYYMMDD or YYYY/MM/DD format
+        val regex = Regex("^\\d{4}[-/]?\\d{2}[-/]?\\d{2}$")
+        return if (regex.matches(date)) {
+            // Remove any slashes or dashes and reformat as YYYY-MM-DD
+            date.replace(Regex("[-/]"), "").let {
+                "${it.substring(0, 4)}-${it.substring(4, 6)}-${it.substring(6, 8)}"
+            }
+        } else {
+            null // Return null if the input is invalid
         }
     }
 }

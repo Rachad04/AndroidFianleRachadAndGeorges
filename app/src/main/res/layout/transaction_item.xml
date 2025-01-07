@@ -11,7 +11,7 @@
         android:layout_weight="1"
         android:text="Activity Description"
         android:importantForAccessibility="yes"
-        android:contentDescription="Activity Description"/>
+        android:contentDescription="Activity Description" />
 
     <TextView
         android:id="@+id/transactionAmount"
@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:text="$Amount"
         android:importantForAccessibility="yes"
-        android:contentDescription="Transaction Amount"/>
+        android:contentDescription="Transaction Amount"
+        android:layout_marginEnd="16dp" />
 
     <TextView
         android:id="@+id/transactionDate"
@@ -27,5 +28,5 @@
         android:layout_height="wrap_content"
         android:text="Date"
         android:importantForAccessibility="yes"
-        android:contentDescription="Transaction Date"/>
+        android:contentDescription="Transaction Date" />
 </LinearLayout>
