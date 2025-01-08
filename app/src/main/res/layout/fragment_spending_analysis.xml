@@ -1,0 +1,35 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Dropdown for Analysis Type -->
+    <Spinner
+        android:id="@+id/spinnerAnalysisType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/analysis_types"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Pie Chart -->
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+
+    <!-- Bar Chart -->
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- RecyclerView for Expense Details -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

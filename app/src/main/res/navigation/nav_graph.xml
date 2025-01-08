@@ -1,16 +1,22 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/budgetFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/budgetFragment"
+        android:name="com.usj.budgettracking.BudgetFragment"
+        android:label="Budget"
+        layout="@layout/fragment_budget" />
+
+    <fragment
+        android:id="@+id/expensesFragment"
         android:name="com.usj.budgettracking.ExpensesFragment"
         android:label="Expenses"
         layout="@layout/fragment_expenses" />
 
     <fragment
-        android:id="@+id/budgetSettingsFragment"
-        android:name="com.usj.budgettracking.BudgetFragment"
-        android:label="Budget"
-        layout="@layout/fragment_budget" />
+        android:id="@+id/spendingAnalysisFragment"
+        android:name="com.usj.budgettracking.SpendingAnalysisFragment"
+        android:label="Spending Analysis"
+        layout="@layout/fragment_spending_analysis" />
 </navigation>

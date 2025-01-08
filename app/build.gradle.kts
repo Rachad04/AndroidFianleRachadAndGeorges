@@ -8,11 +8,6 @@ android {
     namespace = "com.usj.budgettracking"
     compileSdk = 35
 
-
-    viewBinding {
-        enable = true
-    }
-
     defaultConfig {
         applicationId = "com.usj.budgettracking"
         minSdk = 24
@@ -87,20 +82,31 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
     implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.swiperefreshlayout)
     kapt("androidx.room:room-compiler:2.6.0")
 
     // Jetpack Compose
     implementation(platform("androidx.compose:compose-bom:2023.06.01"))
-    implementation("androidx.compose.ui:ui:1.5.1")
-    implementation("androidx.compose.material:material:1.5.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.1")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.5.1")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material:material")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.activity:activity-compose:1.9.3")
 
     // Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
+
+    // MPAndroidChart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    // Retrofit and Gson
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.8.9")
 
     // Testing libraries
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
+

@@ -120,4 +120,49 @@ class ExpenseRepository(context: Context) {
         }
         return null
     }
+
+    fun getExpensesGroupedByCategory(): Map<String, Double> {
+        val db = dbHelper.readableDatabase
+        val query = """
+        SELECT 
+            ${AppDatabaseHelper.COLUMN_EXPENSE_CATEGORY} AS category,
+            SUM(${AppDatabaseHelper.COLUMN_EXPENSE_AMOUNT}) AS total
+        FROM ${AppDatabaseHelper.TABLE_EXPENSES}
+        GROUP BY ${AppDatabaseHelper.COLUMN_EXPENSE_CATEGORY}
+    """
+        val cursor = db.rawQuery(query, null)
+        val groupedData = mutableMapOf<String, Double>()
+
+        cursor.use {
+            while (it.moveToNext()) {
+                val category = it.getString(it.getColumnIndexOrThrow("category"))
+                val total = it.getDouble(it.getColumnIndexOrThrow("total"))
+                groupedData[category] = total
+            }
+        }
+        return groupedData
+    }
+
+    fun getExpensesGroupedByDate(): Map<String, Double> {
+        val db = dbHelper.readableDatabase
+        val query = """
+        SELECT 
+            ${AppDatabaseHelper.COLUMN_EXPENSE_DATE} AS date,
+            SUM(${AppDatabaseHelper.COLUMN_EXPENSE_AMOUNT}) AS total
+        FROM ${AppDatabaseHelper.TABLE_EXPENSES}
+        GROUP BY ${AppDatabaseHelper.COLUMN_EXPENSE_DATE}
+    """
+        val cursor = db.rawQuery(query, null)
+        val groupedData = mutableMapOf<String, Double>()
+
+        cursor.use {
+            while (it.moveToNext()) {
+                val date = it.getString(it.getColumnIndexOrThrow("date"))
+                val total = it.getDouble(it.getColumnIndexOrThrow("total"))
+                groupedData[date] = total
+            }
+        }
+        return groupedData
+    }
+
 }
